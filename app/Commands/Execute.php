@@ -104,19 +104,20 @@ TXT;
             if ($command === 'exit') {
                 $this->info('The task has been completed.');
                 $exit = true;
-            }
-            $this->warn('EXECUTE: ' . $command);
-            $processResult = Process::run($command);
-            if (empty($output = $processResult->output())) {
-                $output = $processResult->successful() ? 'CMD::OK' : $processResult->errorOutput();
-                if(empty($output)) {
-                    $output = 'CMD::KO';
+            }else {
+                $this->warn('EXECUTE: ' . $command);
+                $processResult = Process::run($command);
+                if (empty($output = $processResult->output())) {
+                    $output = $processResult->successful() ? 'CMD::OK' : $processResult->errorOutput();
+                    if (empty($output)) {
+                        $output = 'CMD::KO';
+                    }
                 }
-            }
-            $this->info('OUTPUT: ' . $output);
+                $this->info('OUTPUT: ' . $output);
 
-            //add the command to the conversation
-            $conversation[] = ['role' => 'assistant', 'content' => $output];
+                //add the command to the conversation
+                $conversation[] = ['role' => 'assistant', 'content' => $output];
+            }
         }
         return;
     }
