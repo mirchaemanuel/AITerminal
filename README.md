@@ -1,40 +1,56 @@
-<a href="https://supportukrainenow.org/"><img src="https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner-direct.svg" width="100%"></a>
+# AITerminal
 
-------
+AITerminal is an automation tool for the command line interface (CLI) that interacts with OpenAI's API to execute
+commands based on a given task.
 
-<p align="center">
-    <img title="Laravel Zero" height="100" src="https://raw.githubusercontent.com/laravel-zero/docs/master/images/logo/laravel-zero-readme.png" />
-</p>
+## Disclaimer
 
-<p align="center">
-  <a href="https://github.com/laravel-zero/framework/actions"><img src="https://github.com/laravel-zero/laravel-zero/actions/workflows/tests.yml/badge.svg" alt="Build Status"></img></a>
-  <a href="https://packagist.org/packages/laravel-zero/framework"><img src="https://img.shields.io/packagist/dt/laravel-zero/framework.svg" alt="Total Downloads"></a>
-  <a href="https://packagist.org/packages/laravel-zero/framework"><img src="https://img.shields.io/packagist/v/laravel-zero/framework.svg?label=stable" alt="Latest Stable Version"></a>
-  <a href="https://packagist.org/packages/laravel-zero/framework"><img src="https://img.shields.io/packagist/l/laravel-zero/framework.svg" alt="License"></a>
-</p>
+Please note that AITerminal executes commands on the terminal received from OpenAI. We recommend running the program in
+a sandbox environment, as no validation of the received commands is performed, which could pose potential security
+risks.
 
-<h4> <center>This is a <bold>community project</bold> and not an official Laravel one </center></h4>
+Occasionally, the program may not exit autonomously, requiring you to terminate the execution manually using
+CTRL+C.
 
-Laravel Zero was created by [Nuno Maduro](https://github.com/nunomaduro) and [Owen Voke](https://github.com/owenvoke), and is a micro-framework that provides an elegant starting point for your console application. It is an **unofficial** and customized version of Laravel optimized for building command-line applications.
+## Credits
 
-- Built on top of the [Laravel](https://laravel.com) components.
-- Optional installation of Laravel [Eloquent](https://laravel-zero.com/docs/database/), Laravel [Logging](https://laravel-zero.com/docs/logging/) and many others.
-- Supports interactive [menus](https://laravel-zero.com/docs/build-interactive-menus/) and [desktop notifications](https://laravel-zero.com/docs/send-desktop-notifications/) on Linux, Windows & MacOS.
-- Ships with a [Scheduler](https://laravel-zero.com/docs/task-scheduling/) and  a [Standalone Compiler](https://laravel-zero.com/docs/build-a-standalone-application/).
-- Integration with [Collision](https://github.com/nunomaduro/collision) - Beautiful error reporting
+Thanks to _Vincenzo `vuppi` Petrucci_ for the idea and the original prompt. You can reach him
+on https://github.com/illegalvuppi
 
-------
+We're Illegal! https://github.com/illegalstudio
 
-## Documentation
+## Usage
 
-For full documentation, visit [laravel-zero.com](https://laravel-zero.com/).
+### Installing composer dependencies
 
-## Support the development
-**Do you like this project? Support it by donating**
+```
+composer install
+```
 
-- PayPal: [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=66BYDWAT92N6L)
-- Patreon: [Donate](https://www.patreon.com/nunomaduro)
+or
 
-## License
+```
+docker run --rm --interactive --tty --volume $PWD:/app composer install --ignore-platform-reqs
+```
 
-Laravel Zero is an open-source software licensed under the MIT license.
+### Build
+
+You can build the application
+
+```
+php ai-terminal app:build
+```
+
+It will create a phar executable archive in `/builds`
+
+### Usage
+
+To use AITerminal, follow these steps:
+
+1. Open your terminal or command prompt.
+2. Navigate to the directory containing the AITerminal executable.
+3. edit the .env file to include your OpenAI API key.
+4. Run the following command: `./ai-terminal execute`
+
+After executing the command, you will be prompted to enter the task to be performed. AITerminal will then interact with
+the OpenAI API to execute the task using a series of commands.
