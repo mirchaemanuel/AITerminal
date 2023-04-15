@@ -59,11 +59,11 @@ class Execute extends Command
         /*
          * ask the user if it is ok to execute the task
          */
-//        $confirm = $this->confirm('Do you want the AI to execute the task?');
-//        if (!$confirm) {
-//            $this->error('The task was not executed.');
-//            return;
-//        }
+        $confirm = $this->confirm('Do you want the AI to execute the task?');
+        if (!$confirm) {
+            $this->error('The task was not executed.');
+            return;
+        }
 
         /*
          * This prompt has been suggested by Vuppi @IllegalStudio
