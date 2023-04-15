@@ -12,6 +12,8 @@ Please note that AITerminal executes commands on the terminal received from Open
 a sandbox environment, as no validation of the received commands is performed, which could pose potential security
 risks.
 
+**PRIVACY CONCERNS**: all output of the command will be sent to GPT-4.
+
 Occasionally, the program may not exit autonomously, requiring you to terminate the execution manually using
 CTRL+C.
 
