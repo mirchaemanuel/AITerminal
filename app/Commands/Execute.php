@@ -109,7 +109,10 @@ TXT;
             $this->warn('EXECUTE: ' . $command);
             $processResult = Process::run($command);
             if (empty($output = $processResult->output())) {
-                $output = $processResult->successful() ? 'command ok' : 'command ko';
+                $output = $processResult->successful() ? 'command ok' : $processResult->errorOutput();
+                if(empty($output)) {
+                    $output = 'command ko';
+                }
             }
             $this->info('OUTPUT: ' . $output);
 
