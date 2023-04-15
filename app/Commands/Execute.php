@@ -69,27 +69,26 @@ class Execute extends Command
          * This prompt has been suggested by Vuppi @IllegalStudio
          */
         $prompt = <<<TXT
-You are now an ai that takes a prompt and interacts with a computer sending commands and
-getting back the output. That means that from now everything you get from this side is
-the output of a command. The only exception is if the input starts with "TASK".
-In that case i'm asking you what to do. You have to answer only with new commands
-to be launched and only one command at a time. Then you wait for the output and, based
-on that you send the subsequent command. You MUST NOT add any other information, only the command to be
-executed and wait for the output. If to accomplish the task you need more commands, you must send them
-one at a time, wait the output and then send the next one. For no reason you must not send more than one or
-write anything else of the command to be executed. Sometimes you must guess what operating system or
-what capabilities the cli has. If the prompt than doesnt start with "TASK:", it means it is the
-output of the previous command. Note that a command might have no output. In this case, you receive this message: `command ok` if successful,
-`command ko` if unsuccessful. If the command is successful you can go on with the next command or terminate the execution.
-If there is an error, for no reason you should write anything else of the new command to be executed, but you should write a new command.
-You have to check if the task is completed. When the task is presumably complete, you must send the command "exit" to terminate the execution, and the prompt will end.
-Just answer Ok to this message to acknowledge the task.
+You are an AI that receives a prompt and interacts with a computer by sending commands and receiving output.
+From now on, everything you receive from this side is the output of a command, except if the input starts with "TASK". 
+In that case, I am asking you what to do. You must respond only with new commands to be executed, and only one 
+command at a time. Then, wait for the output and, based on that, send the subsequent command. You MUST NOT add any 
+other information, only the command to be executed, and wait for the output. If you need more commands to complete 
+the task, you must send them one at a time, wait for the output, and then send the next one. Under no circumstances 
+should you send more than one or write anything other than the command to be executed. Sometimes, you must guess 
+the operating system or the CLI's capabilities. If the prompt does not start with "TASK:", it means it is the output 
+of the previous command. Note that a command might have no output. In this case, you receive this message: `command ok` 
+if successful, `command ko` if unsuccessful. If the command is successful, you can proceed with the next command or 
+terminate the execution. If there is an error, you should not write anything other than the new command to be executed.
+You must check if the task is completed. When the task appears to be complete, you must send the "exit" command to 
+terminate the execution, and the prompt will end.
+Reply "Ok" to this message to acknowledge the task.
 TXT;
 
         $conversation = [
             ['role' => 'system', 'content' => 'assistant'],
-            ['role'=> 'user', 'content' => $prompt],
-            ['role'=>'assistant', 'content' => 'OK'],
+            ['role' => 'user', 'content' => $prompt],
+            ['role' => 'assistant', 'content' => 'OK'],
         ];
         $conversation[] = ['role' => 'user', 'content' => 'TASK: ' . $task];
 
@@ -103,7 +102,7 @@ TXT;
             ]);
             //retrieve the command to execute
             $command = $response->toArray()['choices'][0]['message']['content'];
-            if($command === 'exit'){
+            if ($command === 'exit') {
                 $this->info('The task has been completed.');
                 $exit = true;
             }
