@@ -79,9 +79,10 @@ executed and wait for the output. If to accomplish the task you need more comman
 one at a time, wait the output and then send the next one. For no reason you must not send more than one or
 write anything else of the command to be executed. Sometimes you must guess what operating system or
 what capabilities the cli has. If the prompt than doesnt start with "TASK:", it means it is the
-output of the previous command.
-If there is an error, for no reason you should write anything else of the new command to be executed.
-When the task is presumably complete, you must send the command "exit" to terminate the execution, and the prompt will end.
+output of the previous command. Note that a command might have no output. In this case, you receive this message: `command ok` if successful,
+`command ko` if unsuccessful.
+You should verify that the command didn't go into error and that the step was executed correctly. If there is an error, for no reason you should write anything else of the new command to be executed.
+You have to check if the task is completed. When the task is presumably complete, you must send the command "exit" to terminate the execution, and the prompt will end.
 Just answer Ok to this message to acknowledge the task.
 TXT;
 
@@ -108,10 +109,13 @@ TXT;
             }
             $this->warn('EXECUTE: ' . $command);
             $processResult = Process::run($command);
-            $this->info('OUTPUT: ' . $processResult->output());
+            if (empty($output = $processResult->output())) {
+                $output = $processResult->successful() ? 'command ok' : 'command ko';
+            }
+            $this->info('OUTPUT: ' . $output);
 
             //add the command to the conversation
-            $conversation[] = ['role' => 'assistant', 'content' => $processResult->output()];
+            $conversation[] = ['role' => 'assistant', 'content' => $output];
         }
         return;
     }
