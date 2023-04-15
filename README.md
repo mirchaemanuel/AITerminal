@@ -3,6 +3,9 @@
 AITerminal is an automation tool for the command line interface (CLI) that interacts with OpenAI's API to execute
 commands based on a given task.
 
+![aiterminal3](https://user-images.githubusercontent.com/1971953/232225354-712cde45-3375-4f9b-b540-c7e80b64556a.gif)
+
+
 ## Disclaimer
 
 Please note that AITerminal executes commands on the terminal received from OpenAI. We recommend running the program in
